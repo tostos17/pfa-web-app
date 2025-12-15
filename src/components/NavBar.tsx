@@ -14,7 +14,7 @@ const NavBar : React.FC<ToggleFunction> = ({onClick}) => {
             <li><a href="/">about us</a></li>
             <li><a href="/">login</a></li>
         </ul>
-        <FontAwesomeIcon icon={faTimes} onClick={onClick} />
+        <div className="fa-times"><FontAwesomeIcon icon={faTimes} onClick={onClick} /></div>
     </nav>
   )
 }
