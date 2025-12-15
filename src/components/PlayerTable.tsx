@@ -40,7 +40,7 @@ export default function PlayerTable() {
             <td>{player.originState}</td>
             <td>{player.dob}</td>
             <td>
-              <img src={`http://localhost:8135${player.passportPhotoUrl}`} width={60} />
+              <img src={import.meta.env.VITE_BASE_URL + player.passportPhotoUrl} width={60} />
             </td>
           </tr>
         ))}
