@@ -1,5 +1,4 @@
-// src/components/UserTable.tsx
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchPlayers } from "../redux/playerSlice";
 

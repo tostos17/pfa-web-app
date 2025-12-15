@@ -1,4 +1,3 @@
-// src/components/RegisterForm.tsx
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { registerPlayer } from "../redux/playerSlice";
