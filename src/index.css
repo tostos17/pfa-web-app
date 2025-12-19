@@ -18,6 +18,11 @@
   color: white;
 }
 
+.header-container .fa-times {
+  cursor: pointer;
+  color: black;
+}
+
 .nav-bar {
   background-color: #fff;
   padding: 1em .5em;

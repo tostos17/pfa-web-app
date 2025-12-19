@@ -1,0 +1,35 @@
+name: pfa-webapp-pipeline
+on: 
+  push:
+    branches: 
+      - dev
+  pull_request:
+    branches:
+      - dev
+
+jobs: 
+  build: 
+    runs-on: ubuntu-latest
+    environment: dev
+    steps: 
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
+      - name: Build docker image
+        run: docker build -t tostos/pfa-webapp .
+      - name: Publish to dockerhub
+        run: docker push tostos/pfa-webapp:latest
+
+  deploy: 
+    needs: build
+    runs-on: aws-ec2
+    steps: 
+      - name: Pull Image from Dockerhub
+        run: docker pull tostos/pfa-webapp:latest 
+      - name: Delete old container
+        run: docker rm -f pfa-webapp-container
+      - name: Run docker container 
+        run: docker run -dp 80:80 --name pfa-webapp-container tostos/pfa-webapp
+
+

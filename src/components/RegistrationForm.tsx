@@ -1,4 +1,3 @@
-// src/components/RegisterForm.tsx
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { registerPlayer } from "../redux/playerSlice";
@@ -73,7 +72,7 @@ useEffect(() => {
     if (registerResponse.success) {
       toast.success(registerResponse.body);
       setForm(initialFormState);
-    setPhoto(null);
+      setPhoto(null);
     } else {
       toast.error(registerResponse.body || registerResponse.message);
     }

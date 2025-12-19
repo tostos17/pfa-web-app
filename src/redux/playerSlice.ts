@@ -69,7 +69,7 @@ const initialState: PlayerState = {
 };
 
 export const fetchPlayers = createAsyncThunk("users/fetch", async () => {
-  const res = await axios.get("http://localhost:8135/pfa/player/getsummary");
+  const res = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/player/getsummary`);
   console.log(res);
   return res.data as ApiResponse<Page<Player>>;
 });
@@ -83,7 +83,7 @@ export const registerPlayer = createAsyncThunk<
   async (formData, { rejectWithValue }) => {
     try {
       const res = await axios.post(
-        "http://localhost:8135/pfa/player/register",
+        `${import.meta.env.VITE_BASE_API_URL}/player/register`,
         formData
       );
       console.log(res.data)
