@@ -53,7 +53,7 @@ const LoginPage = () => {
           name: responseObject.data.body.name,
           accessToken: responseObject.data.body.accessToken
         })
-          navigate('/home')
+          navigate('/')
         }
         
       };
