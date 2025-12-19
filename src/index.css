@@ -8,6 +8,11 @@ section {
   margin: 1.5em 0;
 }
 
+h1 {
+  color: rgb(19, 19, 90);
+  text-align: center;
+}
+
 .title-div {
   font-size: 0.4rem;
   text-transform: capitalize;
