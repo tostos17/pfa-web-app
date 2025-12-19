@@ -3,7 +3,7 @@ import logo from "../assets/pfa-logo.jpeg";
 
 const Partners = () => {
   return (
-    <section className="patners">
+    <section className="patners top-container">
       <p>partners</p>
 
       <div className="partners-container">
