@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import img1 from "../assets/passport.jpeg";
-import img2 from "../assets/pfa-logo.jpeg";
-import img3 from "../assets/ROSE.jpg";
+import img1 from "../assets/a1.jpeg";
+import img2 from "../assets/a2.jpeg";
+import img3 from "../assets/a3.jpeg";
+import img4 from "../assets/a4.jpeg";
+import img5 from "../assets/a5.jpeg";
+import img6 from "../assets/a6.jpeg";
 import "../App.css";
 
-const images = [img1, img2, img3];
+const images = [img1, img2, img3, img4, img5, img6];
 
 export default function Carousel() {
   const [index, setIndex] = useState(0);
