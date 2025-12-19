@@ -1,11 +1,12 @@
-import { useContext, useEffect, useRef, useState } from "react"
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useEffect, useRef, useState } from "react"
+import { useAppSelector } from "../redux/hooks";
 // import { doLogin } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useAuth, type AuthUser } from "../context/UserContext";
 import axios from "axios";
 import type { ApiResponse } from "../redux/playerSlice";
+import Header from "../components/Header";
 
 
 const LoginPage = () => {
@@ -78,7 +79,11 @@ const LoginPage = () => {
 
   return (
     <>
+        <Header />
+
         {loading && <p>Processing...</p>}
+
+        <h2>Login</h2>
 
         <form onSubmit={handleSubmit} className="login-form">
         <label htmlFor="username">Username</label>
