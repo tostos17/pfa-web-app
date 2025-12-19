@@ -190,14 +190,18 @@ table tbody tr:nth-child(even) {
   padding: .5em 0;
 }
 
+.footer .footer-content {
+  font-size: small;
+}
+
 .footer .social-links {
-  font-size: large;
   margin: .5em 0;
 }
 
 .footer a {
   margin: 0 1em;
   color: orange;
+  font-size: large;
 }
 
 
