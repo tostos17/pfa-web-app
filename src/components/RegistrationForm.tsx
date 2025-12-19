@@ -72,7 +72,7 @@ useEffect(() => {
     if (registerResponse.success) {
       toast.success(registerResponse.body);
       setForm(initialFormState);
-    setPhoto(null);
+      setPhoto(null);
     } else {
       toast.error(registerResponse.body || registerResponse.message);
     }
