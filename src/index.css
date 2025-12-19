@@ -158,7 +158,7 @@ table tbody tr:nth-child(even) {
 
 .patners {
   background-color: orange;
-  padding: 1em;
+  padding: .5em 1em;
 }
 
 .patners p {
