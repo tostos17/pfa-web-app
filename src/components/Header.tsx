@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Title from './Title'
 import NavBar from './NavBar'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
