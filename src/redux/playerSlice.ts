@@ -2,6 +2,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+interface RegisterPlayerArgs {
+  data: FormData;
+  token: string;
+}
+
 export interface ApiResponse<T> {
   code: number;
   message: string;
@@ -68,15 +73,22 @@ const initialState: PlayerState = {
    loading: false 
 };
 
-export const fetchPlayers = createAsyncThunk("users/fetch", async () => {
-  const res = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/player/getsummary`);
+export const fetchPlayers = createAsyncThunk<
+  ApiResponse<Page<Player>>,
+  string
+>("users/fetch", async (token) => {
+  const res = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/player/getsummary`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
   console.log(res);
-  return res.data as ApiResponse<Page<Player>>;
+  return res.data;
 });
 
 export const registerPlayer = createAsyncThunk<
   ApiResponse<string>,      // return type
-  FormData,                 // argument type
+  RegisterPlayerArgs,                 // argument type
   { rejectValue: ApiResponse<string> }
 >(
   "players/register",
@@ -84,7 +96,12 @@ export const registerPlayer = createAsyncThunk<
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_BASE_API_URL}/player/register`,
-        formData
+        formData.data,
+        {
+          headers: {
+            Authorization: `Bearer ${formData.token}`
+          }
+        }
       );
       console.log(res.data)
       return res.data as ApiResponse<string>;
