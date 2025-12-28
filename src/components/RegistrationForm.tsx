@@ -43,7 +43,7 @@ export default function RegisterForm() {
     fd.append("firstname", form.firstname);
     fd.append("middlename", form.middlename);
     fd.append("lastname", form.lastname);
-    fd.append("dob", form.dob);
+    fd.append("dob", birthDate);
     fd.append("originState", form.originState);
     fd.append("nationality", form.nationality);
     fd.append("playerPhone", form.playerPhone);
