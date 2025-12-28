@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { registerPlayer } from "../redux/playerSlice";
 import { ToastContainer, toast } from "react-toastify";
+import { useAuth } from "../context/UserContext";
+import DOBInput from "./DOBInput";
 
 export default function RegisterForm() {
   const dispatch = useAppDispatch();
+  const {user} = useAuth();
 
   const initialFormState = {
     firstname: "",
@@ -30,6 +33,7 @@ export default function RegisterForm() {
   }
 
   const [form, setForm] = useState(initialFormState);
+  const [birthDate, setBirthDate] = useState<string>('');
   const [photo, setPhoto] = useState<File | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -59,7 +63,10 @@ export default function RegisterForm() {
     if (photo) fd.append("photo", photo);
 
     console.log("about to dispatch")
-    dispatch(registerPlayer(fd));
+    dispatch(registerPlayer({
+      data: fd,
+      token: user?.accessToken !== undefined ? user.accessToken : ""
+    }))
   };
   
   const { registerResponse, loading } = useAppSelector(
@@ -89,8 +96,9 @@ useEffect(() => {
       <input placeholder="middlename" value={form.middlename} onChange={e => setForm({ ...form, middlename: e.target.value })} />
       <input placeholder="lastname" value={form.lastname} onChange={e => setForm({ ...form, lastname: e.target.value })} />
       <input type="file" onChange={e => setPhoto(e.target.files?.[0] || null)} />
-      <label htmlFor="dob">Date of Birth:   </label>
-      <input placeholder="Date of birth" name="dob" value={form.dob} type="date" onChange={e => setForm({ ...form, dob: e.target.value })} />
+      <DOBInput onChangeAction={setBirthDate} />
+      {/* <label htmlFor="dob">Date of Birth:   </label>
+      <input placeholder="Date of birth" name="dob" value={form.dob} type="date" onChange={e => setForm({ ...form, dob: e.target.value })} /> */}
       <input placeholder="State of origin" value={form.originState} onChange={e => setForm({ ...form, originState: e.target.value })} />
       <input placeholder="Nationality" onChange={e => setForm({ ...form, nationality: e.target.value })} />
       <input placeholder="Player Phone number" value={form.playerPhone} onChange={e => setForm({ ...form, playerPhone: e.target.value })} />

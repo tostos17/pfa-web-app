@@ -1,13 +1,16 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchPlayers } from "../redux/playerSlice";
+import { useAuth } from "../context/UserContext";
+import { Link } from "react-router-dom";
 
 export default function PlayerTable() {
   const dispatch = useAppDispatch();
   const { playerResponse } = useAppSelector((state) => state.players);
+  const { user } = useAuth();
 
   useEffect(() => {
-    dispatch(fetchPlayers());
+    dispatch(fetchPlayers(user?.accessToken !== undefined ? user.accessToken : ""));
   }, [dispatch]);
 
   return (
@@ -26,6 +29,7 @@ export default function PlayerTable() {
           <th>Origin</th>
           <th>Extra</th>
           <th>Photo</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -42,6 +46,7 @@ export default function PlayerTable() {
             <td>
               <img src={import.meta.env.VITE_BASE_URL + player.passportPhotoUrl} width={60} />
             </td>
+            <td><Link to={`/player?id=${player.playerId}`}>more...</Link> </td>
           </tr>
         ))}
       </tbody>

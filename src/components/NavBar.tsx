@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../context/UserContext";
+import { Link } from "react-router-dom";
 
 interface ToggleFunction {
   onClick?: React.MouseEventHandler<SVGSVGElement>; 
@@ -13,8 +14,9 @@ const NavBar : React.FC<ToggleFunction> = ({onClick}) => {
   return (
       <nav className='nav-bar'>
         <ul>
-            <li><a href="/">home</a></li>
-            <li><a href="/">about us</a></li>
+            <li><Link to="/">home</Link></li>
+            <li><Link to="/reg">Register Player</Link></li>
+            <li><Link to="/players">View Players</Link></li>
             {user ? <li><a href="/logout">logout</a></li> : <li><a href="/login">login</a></li>}
         </ul>
         <div className="fa-times"><FontAwesomeIcon icon={faTimes} onClick={onClick} /></div>
