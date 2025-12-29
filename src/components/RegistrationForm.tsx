@@ -86,7 +86,7 @@ useEffect(() => {
   }, [registerResponse]);
 
   return (
-    <main>
+    <main className="box">
       <h2>player registration</h2>
 
       {loading && <p>Submitting...</p>}

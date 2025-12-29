@@ -14,7 +14,7 @@ export default function PlayerTable() {
   }, [dispatch]);
 
   return (
-    <main>
+    <main className="box">
       <h2>players</h2>
       <div className="table-wrapper">
         <table>
@@ -46,7 +46,7 @@ export default function PlayerTable() {
             <td>
               <img src={import.meta.env.VITE_BASE_URL + player.passportPhotoUrl} width={60} />
             </td>
-            <td><Link to={`/player?id=${player.playerId}`}>more...</Link> </td>
+            <td><Link to={`/playerbyid?id=${player.playerId}`}>more...</Link> </td>
           </tr>
         ))}
       </tbody>
