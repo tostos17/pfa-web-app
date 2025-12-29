@@ -2,8 +2,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+type Award = {
+  id: number
+  title: string,
+  issuer: string,
+  description: string
+  dateReceived: string
+}
+
 interface RegisterPlayerArgs {
   data: FormData;
+  token: string;
+}
+
+interface PlayerDetailsArgs {
+  id: string;
   token: string;
 }
 
@@ -44,6 +57,47 @@ export interface Player {
     playerPhone: string,
 }
 
+export interface PlayerDetails {
+  id: number;
+  playerId: string;
+  passportPhotoUrl: string;
+
+  firstname: string,
+    middlename: string,
+    lastname: string,
+    dob: string,
+    originState: string,
+    nationality: string,
+    playerPhone: string,
+    playerAddress: string,
+    playerEmail: string,
+    squadNumber: string,
+    playerHeight: number,
+    playerWeight: number,
+    hasHealthConcern: boolean,
+    healthConcernDescription: string,
+    parentFirstname: string,
+    parentMiddlename: string,
+    parentLastname: string,
+    parentAddress: string,
+    parentPhone: string,
+    parentEmail: string,
+    parentTitle: string,
+    sponsorFirstname: string,
+    sponsorLastname: string,
+    sponsorTitle: string,
+    sponsorOccupation: string,
+    sponsorPhone: string,
+    sponsorEmail: string,
+    regDate: string,
+    admissionPhotoUrl: string,
+
+    membershipStatus: string,
+
+    awards: Award
+
+}
+
 interface PlayerState {
   playerResponse: ApiResponse<Page<Player>>;
   registerResponse?: ApiResponse<string>;
@@ -72,6 +126,18 @@ const initialState: PlayerState = {
    registerResponse: undefined,
    loading: false 
 };
+
+export const fetchPlayerById = createAsyncThunk<
+  ApiResponse<PlayerDetails>,
+  PlayerDetailsArgs >("fetcher  player", async (params) => {
+    const res = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/player/getplayerdetails/${params.id}`, {
+      headers: {
+        Authorization: `Bearer ${params.token}`
+      }
+    });
+
+    return res.data;
+  })
 
 export const fetchPlayers = createAsyncThunk<
   ApiResponse<Page<Player>>,

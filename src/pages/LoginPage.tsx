@@ -75,7 +75,7 @@ const LoginPage = () => {
     <>
         <Header />
 
-        <div className="login">
+        <div className="login box">
           {loading && <p>Processing...</p>}
 
           <h2>Login</h2>
