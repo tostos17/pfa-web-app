@@ -59,7 +59,7 @@ export interface PlayerDetails {
 
     membershipStatus: string,
 
-    awards: Award
+    awards: [Award]
 
 }
 
@@ -111,13 +111,15 @@ const initialState: PlayerDetailsState = {
 
     membershipStatus: "",
 
-    awards: {
+    awards: [
+      {
         id: 0,
         issuer: "",
         title: "",
         description: "",
         dateReceived: ""
     }
+    ]
     }
    }, 
    loading: false 

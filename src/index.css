@@ -212,4 +212,29 @@ table tbody tr a {
   font-size: large;
 }
 
+.player-details {
+  background-color: #b5a8a8;
+}
+
+.player-details .img-container {
+  text-align: center;
+}
+
+.player-details .img-container img {
+  border-radius: 50%;
+}
+
+.player-details .player-data {
+  margin: 1em 0;
+}
+
+.player-details .player-data p {
+  margin: 1em 0;
+}
+
+.player-details .player-data span {
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
 
