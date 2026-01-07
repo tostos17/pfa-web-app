@@ -10,6 +10,7 @@ import RequireAuth from './components/RequireAuth';
 import { useIdleTimeout } from './hooks/useIdleTimeout';
 import { useAuth } from './context/UserContext';
 import PlayerDetailsPage from './pages/PlayerDetailsPage';
+import PhotoUploadPage from './pages/PhotoUploadPage';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
           <Route path='reg' element={<RegistrationPage />} />
           <Route path='players' element={<PlayerListPage />} />
           <Route path='playerbyid' element={<PlayerDetailsPage />} />
+          <Route path='uploadphoto' element={<PhotoUploadPage />} />
         </Route>
       </Route>
     </Routes>

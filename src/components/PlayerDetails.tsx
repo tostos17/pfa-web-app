@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { useAuth } from "../context/UserContext";
 import { useEffect } from "react";
 import { fetchPlayerById } from "../redux/playerDetailsSlice";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 
@@ -31,7 +31,11 @@ const PlayerDetails = () => {
     <main className="box player-details">
       <h2>Player Record</h2>
         <div className="img-container">
-            <img src={import.meta.env.VITE_BASE_URL + playerDetailsResponse.body.passportPhotoUrl} width={200} />
+            {
+              playerDetailsResponse.body.passportPhotoUrl ? 
+                <img src={import.meta.env.VITE_BASE_URL + playerDetailsResponse.body.passportPhotoUrl} width={200} /> : 
+                <Link to={playerDetailsResponse.body.playerId ? `/uploadphoto?id=${playerDetailsResponse.body.playerId}` : ""}>Upload Photo</Link>
+            }
         </div>
         <div className="player-data">
           <p>Firstname: <span>{playerDetailsResponse.body.firstname}</span></p>

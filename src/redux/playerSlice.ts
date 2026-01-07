@@ -189,9 +189,6 @@ const playerSlice = createSlice({
         state.loading = false;
         state.playerResponse = action.payload;
       })
-      // .addCase(registerPlayer.fulfilled, (state, action) => {
-      //   state.playerResponse.body.content.unshift(action.payload.body);
-      // })
       .addCase(registerPlayer.pending, (state) => {
       state.loading = true;
       state.registerResponse = undefined;
@@ -205,6 +202,7 @@ const playerSlice = createSlice({
       console.log(state.registerResponse)
     })
     .addCase(registerPlayer.rejected, (state, action) => {
+      console.log(action);
       state.loading = false;
       state.registerResponse = action.payload;
     })

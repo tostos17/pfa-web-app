@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react"
 import { useAppSelector } from "../redux/hooks";
 // import { doLogin } from "../redux/userSlice";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useAuth, type AuthUser } from "../context/UserContext";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import type { ApiResponse } from "../redux/playerSlice";
 import Header from "../components/Header";
 
@@ -38,31 +38,61 @@ const LoginPage = () => {
       return apiResponse;
     }
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log("submitted")
+    // const handleSubmit = async (e: React.FormEvent) => {
+    //     e.preventDefault();
+    //     console.log("submitted")
 
-        const fd = new FormData();
-        fd.append("username", form.username);
-        fd.append("password", form.password);
+    //     const fd = new FormData();
+    //     fd.append("username", form.username);
+    //     fd.append("password", form.password);
 
-        // console.log("about to dispatch")
-        // dispatch(doLogin(fd));
+    //     // console.log("about to dispatch")
+    //     // dispatch(doLogin(fd));
 
-        const responseObject = await postLogin(fd);
-        console.log("Access token :")
-        console.log(responseObject.data.body.accessToken);
-        console.log(from)
+    //     const responseObject = await postLogin(fd);
+    //     console.log("Access token :")
+    //     console.log(responseObject.data.body.accessToken);
+    //     console.log(from)
 
-        if(responseObject.data.success) {
-          login({
-          name: responseObject.data.body.name,
-          accessToken: responseObject.data.body.accessToken
-        })
-          navigate(from, { replace: true })
-        }
+    //     if(responseObject.data.success) {
+    //       login({
+    //       name: responseObject.data.body.name,
+    //       accessToken: responseObject.data.body.accessToken
+    //     })
+    //       navigate(from, { replace: true })
+    //     }
         
-      };
+    //   };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  console.log("submitted");
+
+  const fd = new FormData();
+  fd.append("username", form.username);
+  fd.append("password", form.password);
+
+  try {
+    const responseObject = await postLogin(fd);
+
+    console.log("Access token:");
+    console.log(responseObject.data.body.accessToken);
+    console.log(from);
+
+    if (responseObject.data.success) {
+      login({
+        name: responseObject.data.body.name,
+        accessToken: responseObject.data.body.accessToken,
+      });
+
+      navigate(from, { replace: true });
+    }
+  } catch (error) {
+    const err = error as AxiosError
+    toast.error(err.message)
+  }
+};
+
 
       const{loading} = useAppSelector((state) => state.user)
       
